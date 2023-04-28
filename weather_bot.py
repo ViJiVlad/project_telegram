@@ -109,10 +109,12 @@ def send_welcome(message):
 def send_weather(message):
     lon = message.location.longitude
     lat = message.location.latitude
-    result = get_weather(lat, lon)
-    bot.send_message(message.chat.id, result, reply_markup=keyboard)
-    result = get_weather_en(lat, lon)
-    bot.send_message(message.chat.id, result, reply_markup=keyboard)
+    if lang == 'en':
+        result = get_weather_en(lat, lon)
+        bot.send_message(message.chat.id, result, reply_markup=keyboard)
+    elif lang == 'ru':  
+        result = get_weather(lat, lon)
+        bot.send_message(message.chat.id, result, reply_markup=keyboard)
 '''
 @bot.message_handler(regexp=r'видео-кот\.*')
 def cat_video(message):
